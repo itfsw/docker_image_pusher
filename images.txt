@@ -1,7 +1,1 @@
-polarismesh/polaris-server:v1.18.1
-polarismesh/polaris-console:v1.15.0
-polarismesh/polaris-limiter:v1.0.5
-mysql:8.2.0
-prom/pushgateway:v1.9.0
-grafana/grafana:latest
-polarismesh/prometheus:latest
+nginx:1.27
