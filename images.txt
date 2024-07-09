@@ -1,2 +1,1 @@
-headscale/headscale:0.22.3
-ifargle/headscale-webui:v0.6.2
+vaultwarden/server:1.31.0
