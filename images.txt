@@ -1,1 +1,1 @@
-sonatype/nexus3:3.59.0
+gitlab/gitlab-ee:17.2.1-ee.0
