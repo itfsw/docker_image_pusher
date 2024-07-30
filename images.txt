@@ -1,1 +1,1 @@
-oldiy/chrome-novnc:latest
+portainer/portainer-ce:2.20.3
