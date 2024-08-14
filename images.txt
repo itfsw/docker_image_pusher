@@ -1,1 +1,1 @@
-minio/minio:RELEASE.2024-08-03T04-33-23Z
+registry:2.8.3
