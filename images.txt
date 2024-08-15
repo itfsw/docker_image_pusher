@@ -1,1 +1,1 @@
-docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+portainer/agent:2.20.3
