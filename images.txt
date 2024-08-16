@@ -1,1 +1,1 @@
-kibana:8.5.3
+uozi/nginx-ui:v2.0.0-beta.30
