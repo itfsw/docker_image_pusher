@@ -1,1 +1,1 @@
-polarismesh/prometheus:v1.5.0
+grafana/grafana:11.1.4
