@@ -1,1 +1,1 @@
-mysql:8.2.0
+polarismesh/prometheus:v1.5.0
