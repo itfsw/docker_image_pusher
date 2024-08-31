@@ -1,1 +1,1 @@
-gitlab/gitlab-ee:17.3.1-ee.0
+eclipse-temurin:17.0.12_7-jdk
