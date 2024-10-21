@@ -1,1 +1,1 @@
-portainer/portainer-ce:2.21.3
+gitlab/gitlab-ee:17.5.0-ee.0
