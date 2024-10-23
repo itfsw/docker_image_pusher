@@ -1,1 +1,1 @@
-minio/mc:latest
+p3terx/aria2-pro:test
