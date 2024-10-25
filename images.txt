@@ -1,1 +1,1 @@
-p3terx/aria2-pro:test
+portainer/portainer-ce:2.21.4
