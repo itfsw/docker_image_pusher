@@ -1,1 +1,1 @@
-oldiy/firefox-novnc:latest
+headscale/headscale:v0.23.0
