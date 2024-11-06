@@ -1,1 +1,1 @@
-portainer/portainer-ce:2.21.4
+ghcr.io/tale/headplane:0.3.2
