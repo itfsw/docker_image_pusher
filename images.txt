@@ -1,1 +1,1 @@
-traefik:v2.11.13
+portainer/portainer-ce:2.21.4
