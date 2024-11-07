@@ -1,1 +1,1 @@
-fredliang/derper:208878d628c7c6cad604da7798b6deee3894c7a6
+jrottenberg/ffmpeg:7.1-alpine320
