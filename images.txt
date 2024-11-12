@@ -1,1 +1,1 @@
-jrottenberg/ffmpeg:7.1-alpine320
+vaultwarden/server:1.32.4
