@@ -1,1 +1,1 @@
-eryajf/go-ldap-admin-ui:2023-05-09_10-37
+osixia/phpldapadmin:0.9.0
