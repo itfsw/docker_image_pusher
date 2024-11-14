@@ -1,1 +1,1 @@
-eryajf/go-ldap-admin-server:2023-05-09_10-11
+eryajf/go-ldap-admin-ui:2023-05-09_10-37
