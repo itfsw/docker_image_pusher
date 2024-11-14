@@ -1,1 +1,1 @@
-vaultwarden/server:1.32.4
+eryajf/go-ldap-admin-ui:2023-05-09_10-37
