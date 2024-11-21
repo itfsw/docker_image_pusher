@@ -1,1 +1,1 @@
-vaultwarden/server:1.32.5
+ghcr.io/tale/headplane:0.3.6
