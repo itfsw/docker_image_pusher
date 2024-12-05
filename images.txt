@@ -1,1 +1,1 @@
-portainer/agent:2.21.4
+tale/headplane:0.3.7
