@@ -1,1 +1,1 @@
-tale/headplane:0.3.7
+ghcr.io/tale/headplane:0.3.7
