@@ -1,1 +1,1 @@
-ghcr.io/tale/headplane:0.3.7
+elasticdump/elasticsearch-dump:v6.114.0
