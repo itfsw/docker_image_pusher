@@ -1,1 +1,1 @@
-jenkins/jenkins:jdk21
+jenkins/jenkins:jdk17
