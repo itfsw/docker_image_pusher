@@ -1,1 +1,1 @@
-jenkins/jenkins:2.479.2-jdk17
+vaultwarden/server:1.32.5
