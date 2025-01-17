@@ -1,2 +1,2 @@
 nginx:1.27.3
---platform=linux/arm64 nginx:1.27.3 
+--platform=arm64 nginx:1.27.3 
