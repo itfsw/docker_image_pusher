@@ -112,11 +112,11 @@ jobs:
               echo "platform is $platform"
               # 如果存在架构信息 将架构信息拼到镜像名称前面
               if [ -z "$platform" ]; then
-                  platform_arg=""
+                  platform_suffix=""
               else
-                  platform_arg="--platform=${platform}"
+                  platform_suffix="_${platform//\//_}"
               fi
-              echo "platform_arg is $platform_arg"
+              echo "platform_suffix is $platform_suffix"
               # 获取镜像的完整名称，例如kasmweb/nginx:1.25.3（命名空间/镜像名:版本号）
               image=$(echo "$line" | awk '{print $NF}')
           
@@ -133,11 +133,11 @@ jobs:
           
               # 将@sha256:等字符删除
               image_name_tag="${image_name_tag%%@*}"
-              new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$name_space$image_name_tag"
+              new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$name_space$image_name_tag$platform_suffix"
               echo "docker tag $image $new_image"
               docker tag $image $new_image
-              echo "docker push $platform_arg $new_image"
-              docker push $platform_arg $new_image
+              echo "docker push $new_image"
+              docker push $new_image
               echo "开始清理磁盘空间"
               echo "=============================================================================="
               df -hT
