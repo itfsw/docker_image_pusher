@@ -114,7 +114,7 @@ jobs:
               if [ -z "$platform" ]; then
                   platform_arg=""
               else
-                  platform_arg="--platform ${platform}"
+                  platform_arg="--platform=${platform}"
               fi
               echo "platform_arg is $platform_arg"
               # 获取镜像的完整名称，例如kasmweb/nginx:1.25.3（命名空间/镜像名:版本号）
