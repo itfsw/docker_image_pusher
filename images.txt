@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-makeplane/plane-proxy:v0.26.0
-#--platform=arm64 minio/minio:RELEASE.2025-04-22T22-12-26Z
+rabbitmq:3.13.6-management-alpine
+--platform=arm64 rabbitmq:3.13.6-management-alpine
