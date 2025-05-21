@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-apache/iotdb:2.0.2-standalone
---platform=arm64 apache/iotdb:2.0.2-standalone
+ghcr.io/tale/headplane:next
+#--platform=arm64 apache/iotdb:2.0.2-standalone
