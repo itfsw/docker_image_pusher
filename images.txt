@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-dockurr/windows:4.35
-#--platform=arm64 qinchz/dm8-arm64:8.1.3.62
+python:3.10.18-slim-bullseye
+--platform=arm64 python:3.10.18-slim-bullseye
