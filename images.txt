@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-python:3.10.18-slim-bullseye
---platform=arm64 python:3.10.18-slim-bullseye
+headscale/headscale:v0.26.1
+#--platform=arm64 python:3.10.18-slim-bullseye
