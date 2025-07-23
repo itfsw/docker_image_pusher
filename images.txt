@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-registry.cn-hangzhou.aliyuncs.com/eryajf/openldap:1.4.1
+eryajf/go-ldap-admin:2025-06-05_14-57
 #--platform=arm64 emqx/emqx-enterprise:5.10.0
