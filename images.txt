@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-node:24.9.0
+ghcr.io/osgeo/gdal:ubuntu-small-3.1.3-amd64
 #--platform=arm64 eclipse-temurin:21.0.8_9-jre
