@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-gitlab/gitlab-ee:18.2.0-ee.0
-#--platform=arm64 minio/minio:RELEASE.2025-04-03T14-56-28Z
+jenkins/inbound-agent:jdk25
+--platform=arm64 jenkins/inbound-agent:jdk25
