@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-dorowu/ubuntu-desktop-lxde-vnc:focal
+openlistteam/openlist:v4.1.10-ffmpeg
 #--platform=arm64 jenkins/inbound-agent:jdk25
