@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-opendronemap/clusterodm:1.5.5
+rustfs/rustfs:1.0.0-alpha.82
 #--platform=arm64 jenkins/inbound-agent:jdk25
