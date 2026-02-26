@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-ghcr.io/tale/headplane:0.6.2-beta.5
+gitlab/gitlab-ee:18.9.1-ee.0
 #--platform=arm64 jenkins/inbound-agent:jdk25
