@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-nginx:1.31.2
---platform=arm64 nginx:1.31.2
+webodm/webodm_db:latest
+#--platform=arm64 nginx:1.31.2
