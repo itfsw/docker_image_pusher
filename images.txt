@@ -1,3 +1,3 @@
 #支持指定架构 开头加上 --platform=arm64
-jenkins/jenkins:jdk25
+webodm/nodeodx:gpu
 #--platform=arm64 nginx:1.31.6
