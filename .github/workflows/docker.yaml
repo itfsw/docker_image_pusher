@@ -46,10 +46,17 @@ jobs:
         run: |
           echo "Free up disk space complete"
           echo "=============================================================================="
+          # 1. 确认是空间还是 inode
           df -hT
           df -i
+          
+          # 2. 找出大户
+          sudo du -xhd1 /home/runner 2>/dev/null | sort -h | tail -20
+          sudo du -xhd1 /var/lib/docker 2>/dev/null | sort -h | tail -20
           docker system df
           echo "=============================================================================="
+          
+
 
       - name: Checkout Code
         uses: actions/checkout@v4
