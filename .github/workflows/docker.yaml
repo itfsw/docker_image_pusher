@@ -16,68 +16,49 @@ jobs:
     name: Pull
     runs-on: ubuntu-latest
     steps:
-      - name: Before freeing up disk space
+      - name: Check disk before
         run: |
-          echo "Before freeing up disk space"
-          echo "=============================================================================="
           df -hT
           df -i
-          echo "=============================================================================="
 
-      # 增加可用磁盘空间
-      # 注意：不设置 build-mount-path，让 Docker 与根分区共享空间，
-      # 避免根分区被压到 root-reserve-mb 后在 job 收尾写 _diag 日志时写满。
-      - name: Maximize build space
-        uses: dawidd6/maximize-build-space@master
+      # 只删无用软件，不重划分区，根分区保持 145G，
+      # Docker 与 _diag 共享空间，避免 /pv.img 把根分区占满。
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
         with:
-          root-reserve-mb: 4096
-          swap-size-mb: 128
-          remove-dotnet: 'true'
-          remove-android: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: false
 
       - name: Restart docker
         run: |
           sudo service docker restart
           for i in {1..10}; do docker info >/dev/null 2>&1 && break; sleep 2; done
 
-      - name: Free up disk space complete
+      - name: Check disk after
         run: |
-          echo "Free up disk space complete"
-          echo "=============================================================================="
-          # 1. 确认是空间还是 inode
           df -hT
           df -i
-          
-          # 2. 找出大户
-          sudo du -xhd1 /home/runner 2>/dev/null | sort -h | tail -20
-          sudo du -xhd1 /var/lib/docker 2>/dev/null | sort -h | tail -20
           docker system df
-          echo "=============================================================================="
-          
-
 
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 原 Docker Setup Buildx 已删除：
-      # 本 workflow 只用 docker pull/tag/push，没有 docker buildx build，
-      # setup-buildx-action 只会创建常驻 buildkit 容器、拉取 moby/buildkit 镜像，
-      # 占用 /var/lib/docker 空间，纯属多余。
+      # 删除 Docker Setup Buildx：本 workflow 无 docker buildx build
 
       - name: Build and push image Aliyun
         run: |
           echo "$ALIYUN_REGISTRY_PASSWORD" | docker login -u "$ALIYUN_REGISTRY_USER" --password-stdin "$ALIYUN_REGISTRY"
 
-          # 数据预处理，判断镜像是否重名
           declare -A duplicate_images
           declare -A temp_map
           while IFS= read -r line || [ -n "$line" ]; do
               [[ -z "$line" ]] && continue
-              if echo "$line" | grep -q '^\s*#'; then
-                  continue
-              fi
+              echo "$line" | grep -q '^\s*#' && continue
 
               image=$(echo "$line" | awk '{print $NF}')
               image="${image%%@*}"
@@ -96,66 +77,46 @@ jobs:
               fi
           done < images.txt
 
-          # 输出重名检测结果
           if [ ${#duplicate_images[@]} -gt 0 ]; then
-              echo "=============================================================================="
-              echo "WARNING: 以下镜像名在不同命名空间下重复，将推送到不同的前缀路径："
-              for k in "${!duplicate_images[@]}"; do
-                  echo "  - $k"
-              done
-              echo "=============================================================================="
+              echo "WARNING: duplicate image names across namespaces:"
+              for k in "${!duplicate_images[@]}"; do echo "  - $k"; done
           fi
 
           while IFS= read -r line || [ -n "$line" ]; do
               [[ -z "$line" ]] && continue
-              if echo "$line" | grep -q '^\s*#'; then
-                  continue
-              fi
+              echo "$line" | grep -q '^\s*#' && continue
 
               echo "docker pull $line"
               docker pull $line
+
               platform=$(echo "$line" | awk -F'--platform[ =]' '{if (NF>1) print $2}' | awk '{print $1}')
-              echo "platform is $platform"
               if [ -z "$platform" ]; then
                   platform_suffix=""
               else
                   platform_suffix="_${platform//\//_}"
               fi
-              echo "platform_suffix is $platform_suffix"
 
               image=$(echo "$line" | awk '{print $NF}')
               image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
               name_space=$(echo "$image" | awk -F'/' '{if (NF==3) print $2; else if (NF==2) print $1; else print ""}')
               image_name=$(echo "$image_name_tag" | awk -F':' '{print $1}')
-
-              if [ -n "$name_space" ]; then
-                  name_space="${name_space}/"
-              fi
+              [ -n "$name_space" ] && name_space="${name_space}/"
 
               image_name_tag="${image_name_tag%%@*}"
               new_image="$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$name_space$image_name_tag$platform_suffix"
-              echo "docker tag $image $new_image"
+
               docker tag "$image" "$new_image"
-              echo "docker push $new_image"
               docker push "$new_image"
 
-              echo "开始清理磁盘空间"
-              echo "=============================================================================="
               df -hT
               df -i
-              echo "=============================================================================="
               docker rmi "$image" || true
               docker rmi "$new_image" || true
               docker image prune -af >/dev/null 2>&1 || true
-              echo "磁盘空间清理完毕"
-              echo "=============================================================================="
               df -hT
               df -i
-              echo "=============================================================================="
-
           done < images.txt
 
-      # 在 job 收尾（ExecutionContext.Complete 写 _diag/pages 日志）之前释放根分区空间
       - name: Cleanup before job end
         if: always()
         run: |
@@ -163,7 +124,5 @@ jobs:
           docker builder prune -af || true
           sudo rm -rf /home/runner/.cache/* || true
           sudo rm -rf /home/runner/actions-runner/_work/_temp/* || true
-          echo "=============================================================================="
           df -hT
           df -i
-          echo "=============================================================================="
